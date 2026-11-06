@@ -1,6 +1,61 @@
 # Nexora AI MVP audit
 
-## Stabilization milestone — current status
+## AI evaluation + teacher demo — current milestone
+
+**Implementation commit:** `56a15169332cf27d1eb7586c997c6e2a6ff0e5ec` — `Prepare teacher-facing demo and synthetic curriculum review pack`. **Starting revision:** `a20bddc`. Verified locally on 6 November 2026. The earlier audit and stabilization results below remain historical snapshots.
+
+### Delivered scope
+
+- Teacher dashboard now shows authorized classes with per-class attendance and pending-review counts. Its links preselect the intended attendance class, open a pending assignment directly for review, and open the existing assignment/material creation dialogs. Pending reviews are prioritized on the overview. Students do not receive staff class-task summaries or other students' pending counts.
+- Existing UI, modular monolith, schema and dependencies are preserved. No Knowledge DNA, adaptive learning or new AI product capability was introduced. The dashboard makes disabled AI explicit and prioritizes ordinary classroom tools.
+- A fresh local teacher demo contains **3 classes, 18 synthetic learners and 6 pending reviews**. Classes 6 and 8 have saved attendance; Class 7 is ready to mark. Notes, submissions and feedback are synthetic. The seed refuses production, enabled AI, remote databases, nonlocal storage and existing school databases.
+- **27 draft questions** cover Classes 6–8: nine per grade, nine each for Science/Mathematics/English, including three Hindi learner questions. Every case has original synthetic source notes, a draft objective/reference answer and a broad framework reference. This does not establish correct textbook/grade mapping.
+- [Teacher review pack](../backend/evals/teacher_demo_review/TEACHER_REVIEW_PACK.md), [unscored template](../backend/evals/teacher_demo_review/review_cases.template.jsonl), [demo guide](TEACHER_DEMO_GUIDE.md), screenshots and measured task-entry evidence are committed. The user will arrange the qualified teacher review; no outreach, reviewer identity or approval was fabricated.
+
+### Independent verification and results
+
+| Check | Independently observed result |
+| --- | --- |
+| Starting-revision backend rerun | **61 passed**, 30.18 s; package consistency passed |
+| Starting-revision frontend/browser rerun | Typecheck/build passed; **8 browser tests passed**, 19.9 s, exit 0 |
+| Final complete backend suite | **68 passed**, 120.77 s; one existing Starlette TestClient deprecation warning; package consistency passed |
+| Final frontend | Typecheck and production build passed; 15 routes generated; build also passed after restoring the ordinary API rewrite |
+| Final complete Chromium suite | **9 passed**, reported duration 1.4 min, exit 0; fresh `.audit/teacher-demo-final.db` |
+| SQLite migrations | Fresh upgrade/check passed; no schema change introduced |
+| Teacher-demo starter | PowerShell syntax/port guard checked; actual starter created a new `.demo/` database, launched the API/development frontend, and passed login/dashboard smoke checks |
+| Presentation | Desktop 1440px and mobile 390px captures; three class rows; no observed page errors or horizontal overflow; AI status false |
+
+The new browser regression exercises contextual attendance, direct pending-review opening and both creation shortcuts. New backend tests cover dashboard privacy/actionability, seed guardrails/freshness, 27-case coverage and rejection of an incomplete review template. The existing authorization, PDF, attendance, submissions and disabled-AI suites remain passing.
+
+One new seed test initially inherited the global test `sqlite://` setting and was correctly rejected by the file-only demo guard. Its isolated configuration was corrected; no guard was relaxed. Development screenshot automation needed navigation-aware waiting for first-route compilation and an absolute API URL; the corrected smoke check passed. Starter Ctrl+C teardown was not automatically asserted. Production-browser verification and the local development smoke check are distinct observations.
+
+### Evaluation evidence
+
+The [27-case offline report](../backend/evals/results/teacher-demo-stub.json) uses hand-authored stub outputs and SQLite lexical retrieval. It reports **27/27 labelled spans retrieved**, **0/27 pipeline failures** and **0/27 unexpected outcomes**. All sources are short; this is not a broad retrieval, live-model or adversarial-safety benchmark. The earlier ten negative-fixture cases remain separate regression coverage.
+
+**Factuality, grade suitability and curriculum alignment are all unmeasured**, with null scores and zero reviewed outputs. No qualified teacher review has occurred. The template is explicitly `pending-teacher-review` with blank identity/date and null scores, and is intentionally rejected as a completed reviewed dataset. Completed review scores must bind to the exact source, question, grade/language, objective, reference answer, raw stub and delivered output. The runner does not authenticate a teacher's qualifications and does not equate a zero pipeline-error count with educational approval.
+
+Source/grade mapping is a draft for reviewer confirmation. The [CBSE learning framework](https://cbseacademic.nic.in/cbe/learning-framework.html) was consulted as a broad reference; no official endorsement or current-edition textbook alignment is claimed. Hindi questions currently receive original English source excerpts with Hindi framing; the teacher must assess that accessibility limitation.
+
+### Measured workflow evidence
+
+The [raw workflow measurements](demo/workflow-measurements.json) contain three trials per path, alternating path order in warm local Chromium sessions. Each click/select command counts as one logical interaction. Login, returning to Overview, typing, reading and saving are excluded.
+
+| Task-entry check | Existing manual path | Dashboard shortcut | Manual median | Shortcut median |
+| --- | --- | --- | --- | --- |
+| Class 7 attendance | 2 interactions | 1 interaction | 247 ms | 191 ms |
+| New assignment form | 2 interactions | 1 interaction | 161 ms | 88 ms |
+| Waiting submission | 2 interactions | 1 interaction | 175 ms | 194 ms |
+
+All three shortcuts remove one logical navigation action. The review shortcut was slightly slower in this timed sample. **No human teacher time-saving measurement, paper-workflow comparison or daily minutes-saved claim is made.** The guide includes a blank worksheet for an observed teacher session.
+
+### Operational boundaries
+
+`AI_ENABLED=false` was explicit for every demo server, seed and evaluation command. No paid provider, public deployment, production resource or real student data was used. The normal production build rewrite was restored to port 8000 before the separate local demo helper was launched; helper development mode uses local ports 3001/8001 and a fresh `.demo/` database. Development-only generated type-reference imports were restored to their tracked form; Next.js-generated agent guidance was retained.
+
+Unresolved release gates from the stabilization audit still apply: F-05 semantic truth/relevance/age safety, F-06 database tenant defense in depth, PostgreSQL/S3 verification, privacy/retention/deletion, upload isolation, production configuration, backup restoration and real teacher/student usability. This milestone prepares an honest teacher demo and review handover, not an evaluated interactive AI teacher or production readiness clearance.
+
+## Prior stabilization milestone
 
 **Verified 6 November 2026. Implementation commit:** `1ed2bcb2fcb599d99219f4793eab6b23ddf2c1e1` — `Stabilize MVP validation and add offline AI evaluations`. **Parent/baseline:** `633d737`. This report is recorded in a following documentation commit so it can identify the actual implementation hash without a self-referential commit hash.
 
