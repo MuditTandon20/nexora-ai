@@ -33,6 +33,7 @@ class Review(BaseModel):
     delivered_sha256: str = Field(pattern=r'^[0-9a-f]{64}$')
     factuality: int = Field(strict=True, ge=0, le=2)
     grade_suitability: int = Field(strict=True, ge=0, le=2)
+    curriculum_alignment: int | None = Field(default=None, strict=True, ge=0, le=2)
 
 
 class Case(BaseModel):
@@ -47,6 +48,11 @@ class Case(BaseModel):
     must_refuse: bool = False
     expected_failure: bool = False
     review: Review | None = None
+    subject: str | None = Field(default=None, max_length=80)
+    topic: str | None = Field(default=None, max_length=120)
+    learning_objective: str | None = Field(default=None, max_length=500)
+    curriculum_reference: str | None = Field(default=None, max_length=500)
+    reference_answer: str | None = Field(default=None, max_length=2000)
 
     @model_validator(mode='after')
     def labelled(self):
@@ -78,8 +84,12 @@ def load_cases(paths):
 
 
 def review_context(case):
-    return {'source': case.source, 'question': case.question, 'grade': case.grade,
-            'language': case.language, 'prompt_version': PROMPT_VERSION}
+    context = {'source': case.source, 'question': case.question, 'grade': case.grade,
+               'language': case.language, 'prompt_version': PROMPT_VERSION}
+    for field in ['subject', 'topic', 'learning_objective', 'curriculum_reference', 'reference_answer']:
+        if getattr(case, field) is not None:
+            context[field] = getattr(case, field)
+    return context
 
 
 def stub_provider(entry):
@@ -92,7 +102,7 @@ def stub_provider(entry):
 
 
 def human_scores(rows, dimension):
-    values = [row[dimension] for row in rows]
+    values = [row[dimension] for row in rows if row.get(dimension) is not None]
     return {'status': 'measured_on_reviewed_stub_outputs' if values else 'unmeasured',
             'reviewed_outputs': len(values), 'mean_score_0_to_2': sum(values) / len(values) if values else None}
 
@@ -143,6 +153,7 @@ def evaluate(cases, responses):
             'case_count': len(cases), 'cohorts': {'synthetic_unreviewed': len(cases) - teacher_count, 'teacher_reviewed': teacher_count},
             'metrics': {'factuality': human_scores(reviews, 'factuality'),
                         'grade_suitability': human_scores(reviews, 'grade_suitability'),
+                        'curriculum_alignment': human_scores(reviews, 'curriculum_alignment'),
                         'retrieval': {'backend': 'SQLite lexical fallback', 'reference_spans': spans,
                                       'retrieved_reference_spans': sum(r['retrieval_hits'] for r in records),
                                       'reference_span_recall': sum(r['retrieval_hits'] for r in records) / spans if spans else None},

@@ -1,0 +1,163 @@
+{
+  "generated_at_utc": "2026-11-06T12:19:24.007Z",
+  "scope": "Automated warm-session local Chromium task-entry checks; not a human teacher time-saving study.",
+  "conditions": [
+    "Three trials per path with alternating order.",
+    "Login, return-to-overview setup, typing, saving and reading time excluded.",
+    "Each Playwright click or selectOption counts as one logical interaction; native click counts can differ.",
+    "No comparison against teacher paper workflows; no daily minutes-saved claim.",
+    "Only original approved synthetic demo records used; no AI calls."
+  ],
+  "summary": [
+    {
+      "task": "Open Class 7 attendance",
+      "manual_interactions": 2,
+      "shortcut_interactions": 1,
+      "manual_median_ms": 247,
+      "shortcut_median_ms": 191
+    },
+    {
+      "task": "Open new assignment form",
+      "manual_interactions": 2,
+      "shortcut_interactions": 1,
+      "manual_median_ms": 161,
+      "shortcut_median_ms": 88
+    },
+    {
+      "task": "Open a waiting submission",
+      "manual_interactions": 2,
+      "shortcut_interactions": 1,
+      "manual_median_ms": 175,
+      "shortcut_median_ms": 194
+    }
+  ],
+  "trials": [
+    {
+      "task": "Open Class 7 attendance",
+      "path": "existing manual navigation",
+      "trial": 1,
+      "logical_interactions": 2,
+      "elapsed_ms": 394
+    },
+    {
+      "task": "Open Class 7 attendance",
+      "path": "dashboard shortcut",
+      "trial": 1,
+      "logical_interactions": 1,
+      "elapsed_ms": 120
+    },
+    {
+      "task": "Open Class 7 attendance",
+      "path": "dashboard shortcut",
+      "trial": 2,
+      "logical_interactions": 1,
+      "elapsed_ms": 191
+    },
+    {
+      "task": "Open Class 7 attendance",
+      "path": "existing manual navigation",
+      "trial": 2,
+      "logical_interactions": 2,
+      "elapsed_ms": 217
+    },
+    {
+      "task": "Open Class 7 attendance",
+      "path": "existing manual navigation",
+      "trial": 3,
+      "logical_interactions": 2,
+      "elapsed_ms": 247
+    },
+    {
+      "task": "Open Class 7 attendance",
+      "path": "dashboard shortcut",
+      "trial": 3,
+      "logical_interactions": 1,
+      "elapsed_ms": 204
+    },
+    {
+      "task": "Open new assignment form",
+      "path": "existing manual navigation",
+      "trial": 1,
+      "logical_interactions": 2,
+      "elapsed_ms": 170
+    },
+    {
+      "task": "Open new assignment form",
+      "path": "dashboard shortcut",
+      "trial": 1,
+      "logical_interactions": 1,
+      "elapsed_ms": 92
+    },
+    {
+      "task": "Open new assignment form",
+      "path": "dashboard shortcut",
+      "trial": 2,
+      "logical_interactions": 1,
+      "elapsed_ms": 67
+    },
+    {
+      "task": "Open new assignment form",
+      "path": "existing manual navigation",
+      "trial": 2,
+      "logical_interactions": 2,
+      "elapsed_ms": 161
+    },
+    {
+      "task": "Open new assignment form",
+      "path": "existing manual navigation",
+      "trial": 3,
+      "logical_interactions": 2,
+      "elapsed_ms": 146
+    },
+    {
+      "task": "Open new assignment form",
+      "path": "dashboard shortcut",
+      "trial": 3,
+      "logical_interactions": 1,
+      "elapsed_ms": 88
+    },
+    {
+      "task": "Open a waiting submission",
+      "path": "existing manual navigation",
+      "trial": 1,
+      "logical_interactions": 2,
+      "elapsed_ms": 175
+    },
+    {
+      "task": "Open a waiting submission",
+      "path": "dashboard shortcut",
+      "trial": 1,
+      "logical_interactions": 1,
+      "elapsed_ms": 168
+    },
+    {
+      "task": "Open a waiting submission",
+      "path": "dashboard shortcut",
+      "trial": 2,
+      "logical_interactions": 1,
+      "elapsed_ms": 315
+    },
+    {
+      "task": "Open a waiting submission",
+      "path": "existing manual navigation",
+      "trial": 2,
+      "logical_interactions": 2,
+      "elapsed_ms": 208
+    },
+    {
+      "task": "Open a waiting submission",
+      "path": "existing manual navigation",
+      "trial": 3,
+      "logical_interactions": 2,
+      "elapsed_ms": 168
+    },
+    {
+      "task": "Open a waiting submission",
+      "path": "dashboard shortcut",
+      "trial": 3,
+      "logical_interactions": 1,
+      "elapsed_ms": 194
+    }
+  ],
+  "page_errors": []
+}

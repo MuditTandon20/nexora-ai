@@ -30,6 +30,8 @@ No live-model factuality, learner comprehension, model latency or inference cost
 
 ## Human review rubric and future coverage
 
+The teacher-demo milestone adds [27 draft questions](teacher_demo_cases.jsonl), [stub outputs](teacher_demo_stubs.json), [a printable review pack](teacher_demo_review/TEACHER_REVIEW_PACK.md) and an intentionally unscored [template](teacher_demo_review/review_cases.template.jsonl). Run `python -m evals.prepare_review` to regenerate the handover. No qualified teacher review is claimed. Curriculum alignment has its own optional 0–2 human score; it remains null until actually assessed. `pending-teacher-review` template statuses must be changed only after completion.
+
 `cases.jsonl` is a small **synthetic, unreviewed** dataset. No real student data or teacher endorsement is claimed. Add teacher-reviewed examples only after an actual teacher reviews and records them. The automatic tests in `tests/test_ai.py` verify contracts/evidence/failure handling; they do not establish model quality.
 
 Run a provider evaluation only with approval for its inference charges. There is no automatic paid evaluation during setup or tests. Before/after each model or prompt change, run the same cases through the configured provider in a private evaluation environment and preserve model ID, prompt version, source, response, latency and configured token-cost estimate.

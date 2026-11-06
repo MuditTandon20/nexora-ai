@@ -186,10 +186,30 @@ def dashboard(user: User = Depends(current_user), db: DB = Depends(get_db)):
     if user.role == 'student':
         sub_query = sub_query.where(Submission.student_id == user.id)
     submissions = list(db.scalars(sub_query))
+    pending = {}
+    homework_class = {h.id: h.class_id for h in hw}
+    for s in submissions:
+        if s.status == 'submitted':
+            pending[s.homework_id] = pending.get(s.homework_id, 0) + 1
+    tasks = []
+    if user.role != 'student':
+        sizes = dict(db.execute(select(Enrollment.class_id, func.count()).where(Enrollment.class_id.in_(ids)).group_by(Enrollment.class_id)).all())
+        for c in db.scalars(select(Classroom).where(Classroom.id.in_(ids)).order_by(Classroom.name)):
+            marked = [r for r in rows if r.class_id == c.id]
+            tasks.append({'class_id': c.id, 'name': c.name, 'students': sizes.get(c.id, 0),
+                          'attendance_saved': bool(marked) and len(marked) == sizes.get(c.id, 0),
+                          'present': sum(r.status == 'present' for r in marked),
+                          'pending_review': sum(count for hid, count in pending.items() if homework_class.get(hid) == c.id)})
+        # Put actionable reviews first, then current/upcoming assignments.
+        hw.sort(key=lambda h: (not bool(pending.get(h.id)), h.due_date < today() and not bool(pending.get(h.id)), h.due_date, h.id))
+    cfg = settings()
     return {'date': str(today()), 'classes': len(ids), 'attendance_present': sum(r.status == 'present' for r in rows),
             'attendance_total': len(rows), 'attendance_status': rows[0].status if user.role == 'student' and rows else None,
             'pending_review': sum(s.status == 'submitted' for s in submissions),
-            'homework': [{'id': h.id, 'title': h.title, 'due_date': str(h.due_date), 'class_id': h.class_id} for h in hw[:6]],
+            'class_tasks': tasks,
+            'ai_available': bool(cfg.ai_enabled and cfg.llm_base_url and cfg.llm_api_key and cfg.llm_model),
+            'homework': [{'id': h.id, 'title': h.title, 'due_date': str(h.due_date), 'class_id': h.class_id,
+                          'pending_review': pending.get(h.id, 0) if user.role != 'student' else 0} for h in hw[:6]],
             'materials': db.scalar(select(func.count()).select_from(Material).where(Material.class_id.in_(ids), Material.approved == True)),
             'announcements': [{'id': n.id, 'title': n.title, 'body': n.body} for n in db.scalars(select(Notification).where(Notification.user_id == user.id).order_by(Notification.created_at.desc()).limit(4))]}
 

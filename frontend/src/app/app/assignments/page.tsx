@@ -42,7 +42,20 @@ export default function AssignmentsPage() {
   const [busy, setBusy] = useState(false);
   const load = () => api<Homework[]>("/homework").then(setItems);
   useEffect(() => {
-    load().catch((e) => setError(e.message));
+    const query = new URLSearchParams(window.location.search);
+    if (!student && query.get("create") === "1") setCreate(true);
+    api<Homework[]>("/homework")
+      .then(async (rows) => {
+        setItems(rows);
+        const target = rows.find((h) => h.id === Number(query.get("review")));
+        if (target && !student) {
+          setSubmissions(
+            await api<Submission[]>(`/homework/${target.id}/submissions`),
+          );
+          setSelected(target);
+        }
+      })
+      .catch((e) => setError(e.message));
   }, []);
   const openHomework = async (h: Homework) => {
     setError("");

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./readability.css";
+import "./teacher-demo.css";
 import Pwa from "@/components/pwa";
 
 export const metadata: Metadata = {

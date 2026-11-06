@@ -26,7 +26,22 @@ type Dashboard = {
   attendance_status: string | null;
   pending_review: number;
   materials: number;
-  homework: { id: number; title: string; due_date: string; class_id: number }[];
+  ai_available: boolean;
+  class_tasks: {
+    class_id: number;
+    name: string;
+    students: number;
+    attendance_saved: boolean;
+    present: number;
+    pending_review: number;
+  }[];
+  homework: {
+    id: number;
+    title: string;
+    due_date: string;
+    class_id: number;
+    pending_review: number;
+  }[];
   announcements: { id: number; title: string; body: string }[];
 };
 export default function Overview() {
@@ -58,7 +73,7 @@ export default function Overview() {
           <p>
             {student
               ? "Small steps, new ideas. Your learning adventure starts here."
-              : "Your classroom, in a clear view. Let’s make today a little lighter."}
+              : "Choose a class, mark attendance, and review the work waiting for you."}
           </p>
         </div>
         <div className="date-card">
@@ -74,6 +89,73 @@ export default function Overview() {
         </div>
       </div>
       <ErrorMessage error={error} />
+      {!student && data && (
+        <section className="panel teacher-today">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">YOUR NEXT CLASSROOM TASK</span>
+              <h2>Today’s classes</h2>
+            </div>
+            <span className="subtle">
+              {
+                data.class_tasks.filter(
+                  (c) => c.students > 0 && !c.attendance_saved,
+                ).length
+              }{" "}
+              waiting for attendance
+            </span>
+          </div>
+          {data.class_tasks.length ? (
+            <div className="teacher-class-list">
+              {data.class_tasks.map((c) => (
+                <article className="teacher-class-row" key={c.class_id}>
+                  <span className="icon-tile green">
+                    <CalendarCheck size={20} />
+                  </span>
+                  <div>
+                    <h3>{c.name}</h3>
+                    <p>
+                      {c.students} students · {c.pending_review}{" "}
+                      {c.pending_review === 1 ? "submission" : "submissions"} to
+                      review
+                    </p>
+                  </div>
+                  <span
+                    className={`badge ${c.attendance_saved ? "green" : "amber"}`}
+                  >
+                    {!c.students
+                      ? "No students"
+                      : c.attendance_saved
+                        ? `${c.present}/${c.students} present`
+                        : "Not marked"}
+                  </span>
+                  {c.students > 0 ? (
+                    <Link
+                      className={`button ${c.attendance_saved ? "secondary" : ""}`}
+                      href={`/app/attendance?classId=${c.class_id}`}
+                      aria-label={`${c.attendance_saved ? "View" : "Mark"} attendance for ${c.name}`}
+                    >
+                      {c.attendance_saved
+                        ? "View attendance"
+                        : "Mark attendance"}
+                      <ArrowRight size={15} />
+                    </Link>
+                  ) : (
+                    <span className="subtle">
+                      Ask your administrator to enroll students
+                    </span>
+                  )}
+                </article>
+              ))}
+            </div>
+          ) : (
+            <Empty
+              title="Your classes will appear here"
+              description="Your school administrator can assign your classes and students."
+            />
+          )}
+        </section>
+      )}
       <div className="stats-grid">
         {[
           {
@@ -177,17 +259,17 @@ export default function Overview() {
                     },
                     {
                       title: "Create an assignment",
-                      text: "Give curious minds a little nudge",
-                      href: "/app/assignments",
+                      text: "Open a new homework form",
+                      href: "/app/assignments?create=1",
                       icon: ClipboardList,
                       color: "amber",
                     },
                     {
-                      title: "Make a learning pack",
-                      text: "From chapter notes to aha! moments",
-                      href: "/app/studio",
-                      icon: Sparkles,
-                      color: "lilac",
+                      title: "Share study material",
+                      text: "Add chapter notes or a PDF",
+                      href: "/app/notes?create=1",
+                      icon: BookOpen,
+                      color: "blue",
                     },
                   ]
               ).map((a) => (
@@ -220,7 +302,11 @@ export default function Overview() {
               <div className="assignment-list">
                 {data.homework.map((h, i) => (
                   <Link
-                    href="/app/assignments"
+                    href={
+                      !student && h.pending_review
+                        ? `/app/assignments?review=${h.id}`
+                        : "/app/assignments"
+                    }
                     className="assignment-row"
                     key={h.id}
                   >
@@ -235,6 +321,11 @@ export default function Overview() {
                         {classes.find((c) => c.id === h.class_id)?.name ||
                           "Your class"}
                       </small>
+                      {!student && h.pending_review > 0 && (
+                        <span className="badge amber">
+                          {h.pending_review} waiting for review
+                        </span>
+                      )}
                     </div>
                     <span className="due-label">
                       <Clock3 size={13} />
@@ -264,18 +355,24 @@ export default function Overview() {
               <h2>
                 {student
                   ? "Big questions are welcome here."
-                  : "A teaching assistant for your teaching style."}
+                  : data?.ai_available
+                    ? "A teaching assistant for your teaching style."
+                    : "Your classroom tools work with AI switched off."}
               </h2>
               <p>
                 {student
                   ? "Explore your chapter, one question at a time."
-                  : "Turn your approved chapter notes into quizzes, flashcards and summaries."}
+                  : data?.ai_available
+                    ? "Review generated quizzes, flashcards and summaries before sharing."
+                    : "Mark attendance, share notes and review homework. AI explanations are not enabled for students."}
               </p>
               <Link
                 href={student ? "/app/buddy" : "/app/studio"}
                 className="text-link"
               >
-                {student ? "Meet Study Buddy" : "Open AI learning studio"}{" "}
+                {student
+                  ? "Meet Study Buddy"
+                  : "View AI status & reviewed packs"}{" "}
                 <ArrowRight size={16} />
               </Link>
             </div>

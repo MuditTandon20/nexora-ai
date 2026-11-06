@@ -32,7 +32,14 @@ export default function AttendancePage() {
   const requestSequence = useRef(0);
   const student = user.role === "student";
   useEffect(() => {
-    if (classes.length && !classId) setClassId(String(classes[0].id));
+    if (classes.length && !classId) {
+      const requested = Number(
+        new URLSearchParams(window.location.search).get("classId"),
+      );
+      setClassId(
+        String(classes.find((c) => c.id === requested)?.id ?? classes[0].id),
+      );
+    }
   }, [classes, classId]);
   const load = async () => {
     if (!classId) return;

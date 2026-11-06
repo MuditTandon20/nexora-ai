@@ -6,6 +6,8 @@ A school productivity MVP for Classes 1–10. Built as a Next.js/TypeScript fron
 
 This is working pilot software, **not a claim of production readiness**. Demo names and records are synthetic. Nothing has been deployed publicly, and setup makes no paid AI requests.
 
+For the polished teacher demo with three classes, pending work and a 27-question review pack, see [the teacher demo guide](docs/TEACHER_DEMO_GUIDE.md). After installing dependencies, run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-teacher-demo.ps1` from this folder.
+
 ## What works
 
 - Administrator creates school-issued accounts, creates classes with teachers/students, publishes announcements and reads audit activity.

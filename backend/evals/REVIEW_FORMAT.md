@@ -25,4 +25,6 @@ review_fields = {
 
 The final `review` object also needs `reviewer_id`, `reviewed_at`, `factuality`, and `grade_suitability`. A failed provider response is a failure-rate case, not a successfully delivered response to grade. Review metadata is declared provenance: the runner cannot authenticate reviewer identities. Keep an independently approved review record outside the repository if the school requires one.
 
+Teacher-demo cases also bind subject, topic, proposed learning objective, framework reference and draft reference answer in the context hash. An optional `curriculum_alignment` score uses the same 0–2 scale; leave it null when it has not been assessed. A null value is excluded from the measured denominator, not treated as zero or as approval. The generated review template starts at `pending-teacher-review` and must be completed from an actual review before changing its status.
+
 Factuality rubric: 0 = contradicts/unsupported; 1 = partially supported or misleading; 2 = correct in the reviewed context. Grade rubric: 0 = unsuitable; 1 = needs adaptation; 2 = understandable and appropriate for the specified class/language. A source quotation is not automatically a score of 2 in either dimension.

@@ -341,7 +341,10 @@ export default function Workspace({ children }: { children: React.ReactNode }) {
             </div>
             <div className="topbar-actions">
               <span className="school-session">
-                <span /> SCHOOL WORKSPACE
+                <span />{" "}
+                {school.endsWith("· Demo")
+                  ? "SYNTHETIC DEMO"
+                  : "SCHOOL WORKSPACE"}
               </span>
               <Link
                 className="icon-button"

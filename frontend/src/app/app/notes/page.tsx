@@ -34,6 +34,11 @@ export default function NotesPage() {
   const load = () => api<Material[]>("/materials").then(setMaterials);
   useEffect(() => {
     load().catch((e) => setError(e.message));
+    if (
+      user.role !== "student" &&
+      new URLSearchParams(window.location.search).get("create") === "1"
+    )
+      setOpen(true);
   }, []);
   return (
     <>

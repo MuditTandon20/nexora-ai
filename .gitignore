@@ -22,3 +22,4 @@ playwright-report/
 backend/.test-upload/
 .audit/
 frontend/.audit/
+.demo/

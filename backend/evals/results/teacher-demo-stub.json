@@ -1,0 +1,535 @@
+{
+  "schema_version": 1,
+  "provider": "offline-stub-v1",
+  "prompt_version": "nexora-v2",
+  "dataset_sha256": "dce17a8e69cc37631ffa3e83fbfb0436c49090cb6ecb6fb3da3008c9fdf82528",
+  "responses_sha256": "643e459f07da16bd8e66ed581af902cec308197ae05fe2dff0714fbafc5bb33a",
+  "case_count": 27,
+  "cohorts": {
+    "synthetic_unreviewed": 27,
+    "teacher_reviewed": 0
+  },
+  "metrics": {
+    "factuality": {
+      "status": "unmeasured",
+      "reviewed_outputs": 0,
+      "mean_score_0_to_2": null
+    },
+    "grade_suitability": {
+      "status": "unmeasured",
+      "reviewed_outputs": 0,
+      "mean_score_0_to_2": null
+    },
+    "curriculum_alignment": {
+      "status": "unmeasured",
+      "reviewed_outputs": 0,
+      "mean_score_0_to_2": null
+    },
+    "retrieval": {
+      "backend": "SQLite lexical fallback",
+      "reference_spans": 27,
+      "retrieved_reference_spans": 27,
+      "reference_span_recall": 1.0
+    },
+    "failure_rate": 0.0,
+    "failures": 0,
+    "unexpected_outcome_rate": 0.0,
+    "unexpected_outcomes": 0
+  },
+  "limitations": [
+    "Stub/pipeline measurements are not live model quality measurements.",
+    "Factuality and grade scores are aggregated only from explicitly supplied, hash-bound human annotations.",
+    "Review metadata is declared provenance; the runner does not authenticate a reviewer identity.",
+    "Reference-span retrieval and evidence-only delivery do not establish semantic truth or question relevance.",
+    "Expected malformed/timeout fixtures count in failure_rate; inspect unexpected_outcome_rate separately.",
+    "No teacher-reviewed cohort means human dimensions are null, not zero or perfect."
+  ],
+  "records": [
+    {
+      "id": "demo-c6-01",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nA filter can trap sand while allowing water to pass through.",
+        "source_quote": "A filter can trap sand while allowing water to pass through.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-02",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "असत्यापित व्याख्या के बजाय, स्वीकृत अध्याय का मूल अंश:\nWet clothes dry as water evaporates into the air.",
+        "source_quote": "Wet clothes dry as water evaporates into the air.",
+        "follow_up": "इस अंश के बारे में आप अपने शिक्षक से क्या पूछना चाहेंगे?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-03",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nA pencil from 2 cm to 11 cm has a length of 9 cm.",
+        "source_quote": "A pencil from 2 cm to 11 cm has a length of 9 cm.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-04",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nOne eighth plus two eighths equals three eighths.",
+        "source_quote": "One eighth plus two eighths equals three eighths.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-05",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nA rectangle 5 cm long and 3 cm wide has perimeter 5 + 3 + 5 + 3 = 16 cm.",
+        "source_quote": "A rectangle 5 cm long and 3 cm wide has perimeter 5 + 3 + 5 + 3 = 16 cm.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-06",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nA straight angle measures 180 degrees, which is twice a right angle.",
+        "source_quote": "A straight angle measures 180 degrees, which is twice a right angle.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-07",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nIn the sentence 'The cat sleeps', the word 'cat' is a noun.",
+        "source_quote": "In the sentence 'The cat sleeps', the word 'cat' is a noun.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-08",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nIn the sentence 'Mina jumps over a puddle', the word 'jumps' tells the action.",
+        "source_quote": "In the sentence 'Mina jumps over a puddle', the word 'jumps' tells the action.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c6-09",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nShe refilled the bowl every afternoon because the weather was hot.",
+        "source_quote": "She refilled the bowl every afternoon because the weather was hot.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-01",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nGreen plants use light energy to make food through photosynthesis.",
+        "source_quote": "Green plants use light energy to make food through photosynthesis.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-02",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "असत्यापित व्याख्या के बजाय, स्वीकृत अध्याय का मूल अंश:\nA metal spoon placed in hot soup can become warm because heat travels through the metal.",
+        "source_quote": "A metal spoon placed in hot soup can become warm because heat travels through the metal.",
+        "follow_up": "इस अंश के बारे में आप अपने शिक्षक से क्या पूछना चाहेंगे?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-03",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nAn acidic solution turns blue litmus red, while a basic solution turns red litmus blue.",
+        "source_quote": "An acidic solution turns blue litmus red, while a basic solution turns red litmus blue.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-04",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nStarting at -3 and adding 5 gives 2.",
+        "source_quote": "Starting at -3 and adding 5 gives 2.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-05",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nIn x + 5 = 12, subtracting 5 from both sides gives x = 7.",
+        "source_quote": "In x + 5 = 12, subtracting 5 from both sides gives x = 7.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-06",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nTwenty-five percent of 80 rupees is 20 rupees.",
+        "source_quote": "Twenty-five percent of 80 rupees is 20 rupees.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-07",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nIn 'The tortoise moved slowly', the word 'slowly' describes how it moved.",
+        "source_quote": "In 'The tortoise moved slowly', the word 'slowly' describes how it moved.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-08",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nThe conjunction 'because' introduces a reason.",
+        "source_quote": "The conjunction 'because' introduces a reason.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c7-09",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nRavi returned it the next day; in this sentence, 'it' refers to the atlas.",
+        "source_quote": "Ravi returned it the next day; in this sentence, 'it' refers to the atlas.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-01",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nA force can change an object's speed, direction or shape.",
+        "source_quote": "A force can change an object's speed, direction or shape.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-02",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "असत्यापित व्याख्या के बजाय, स्वीकृत अध्याय का मूल अंश:\nFriction between a shoe and the ground helps a person walk without slipping.",
+        "source_quote": "Friction between a shoe and the ground helps a person walk without slipping.",
+        "follow_up": "इस अंश के बारे में आप अपने शिक्षक से क्या पूछना चाहेंगे?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-03",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nYeast produces carbon dioxide during fermentation, which can help bread dough rise.",
+        "source_quote": "Yeast produces carbon dioxide during fermentation, which can help bread dough rise.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-04",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nDividing both sides by 2 gives x = 4.",
+        "source_quote": "Dividing both sides by 2 gives x = 4.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-05",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nThe principal square root of 144 is 12 because 12 times 12 equals 144.",
+        "source_quote": "The principal square root of 144 is 12 because 12 times 12 equals 144.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-06",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nThe sale price is 200 minus 20, or 180 rupees.",
+        "source_quote": "The sale price is 200 minus 20, or 180 rupees.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-07",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\n'The gardener planted the tree' can become 'The tree was planted by the gardener' in the passive voice.",
+        "source_quote": "'The gardener planted the tree' can become 'The tree was planted by the gardener' in the passive voice.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-08",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nIn 'We postponed the match because it rained', the clause 'because it rained' gives the reason.",
+        "source_quote": "In 'We postponed the match because it rained', the clause 'because it rained' gives the reason.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "demo-c8-09",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nHer decision to retest suggests that she wanted to improve the bridge's strength.",
+        "source_quote": "Her decision to retest suggests that she wanted to improve the bridge's strength.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    }
+  ]
+}
