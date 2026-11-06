@@ -1,6 +1,6 @@
 from datetime import date
-from typing import Literal
-from pydantic import BaseModel, Field, model_validator
+from typing import Annotated, Literal
+from pydantic import BaseModel, Field, StringConstraints, model_validator
 
 
 class LoginIn(BaseModel):
@@ -21,7 +21,7 @@ class UserIn(BaseModel):
 
 
 class ClassIn(BaseModel):
-    name: str = Field(min_length=2, max_length=80)
+    name: Annotated[str, StringConstraints(strip_whitespace=True, min_length=2, max_length=80)]
     grade: int = Field(ge=1, le=10)
     teacher_ids: list[int] = Field(default_factory=list, max_length=30)
     student_ids: list[int] = Field(default_factory=list, max_length=100)
@@ -86,7 +86,7 @@ class CardOut(BaseModel):
 class LearningPack(BaseModel):
     title: str = Field(min_length=3, max_length=160)
     summary: str = Field(min_length=20, max_length=5000)
-    questions: list[QuestionOut] = Field(min_length=5, max_length=12)
+    questions: list[QuestionOut] = Field(min_length=6, max_length=12)
     flashcards: list[CardOut] = Field(min_length=2, max_length=12)
 
     @model_validator(mode='after')
@@ -96,6 +96,11 @@ class LearningPack(BaseModel):
             raise ValueError('Duplicate questions')
         if sum(q.kind == 'mcq' for q in self.questions) < 5:
             raise ValueError('At least five MCQs required for the daily challenge')
+        if not any(q.kind == 'short_answer' for q in self.questions):
+            raise ValueError('At least one short-answer question is required')
+        fronts = [' '.join(c.front.casefold().split()) for c in self.flashcards]
+        if len(fronts) != len(set(fronts)):
+            raise ValueError('Duplicate flashcard fronts')
         return self
 
 

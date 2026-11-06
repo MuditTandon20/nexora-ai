@@ -14,13 +14,15 @@ This is working pilot software, **not a claim of production readiness**. Demo na
 - Teachers upload readable PDFs or write lessons, review drafts and approve them. Downloads pass through authenticated authorization checks. Approved lessons notify students.
 - Teachers create homework; students submit written answers; teachers request revision or mark complete with feedback. Upcoming deadlines and review events appear in notifications.
 - AI learning studio generates structured chapter-grounded MCQs, short answers, flashcards and summaries; teachers edit and approve a stored pack before publishing.
-- Study Buddy retrieves from an approved chapter, explains in English/Hindi and quotes supporting evidence. Conversations are not persisted by Nexora.
+- Study Buddy retrieves from an approved chapter and conservatively returns source excerpts or a fixed abstention with English/Hindi framing. Unverified generated explanations and follow-up claims are discarded. Conversations are not persisted by Nexora.
 - Arena has a five-question daily challenge, class quizzes, instant server-checked feedback, personal completion history and participation/improvement badges. No public individual rankings or punitive streaks.
 - Teacher analytics show attendance trends, assignment completion and aggregate practice accuracy by topic.
 
 AI requires school-approved provider credentials. Without them, the application clearly says AI is unavailable; teacher-authored demo quizzes and ordinary school workflows work normally.
 
 **Free local mode is the default.** `AI_ENABLED=false` prevents provider calls even if credentials are supplied. Keep it disabled until you explicitly approve a provider and any costs. No hosting, paid storage, messaging or AI subscription is required for the local demo.
+
+The stabilization milestone adds an [offline stub evaluation runner](backend/evals/README.md) and [recorded results](backend/evals/results/stabilization-stub.json). Factuality and grade suitability remain unmeasured until actual teacher-reviewed cases are supplied; quotation/source matching is not semantic fact checking. See the [current audit](docs/NEXORA_MVP_AUDIT.md).
 
 ## Run locally on Windows
 

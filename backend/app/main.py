@@ -11,6 +11,7 @@ from .config import settings
 from .routes import router
 from .learning import router as learning_router
 from .arena import router as arena_router
+from .request_limits import RequestBodyLimit
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('nexora')
@@ -29,8 +30,6 @@ async def protection(request: Request, call_next):
         origin = request.headers.get('origin')
         if origin and origin != settings().frontend_origin:
             return JSONResponse({'detail': 'Origin not allowed'}, 403)
-        if int(request.headers.get('content-length', '0')) > 11 * 1024 * 1024:
-            return JSONResponse({'detail': 'Request too large'}, 413)
     # In-process limiter for one replica. Do not trust user-controlled forwarded headers.
     key = (request.client.host if request.client else 'unknown', 'login' if request.url.path == '/api/auth/login' else 'api')
     limit = 15 if key[1] == 'login' else 300
@@ -63,3 +62,7 @@ def health():
     with engine.connect() as connection:
         connection.execute(text('SELECT 1'))
     return {'status': 'ok', 'version': '0.1.0'}
+
+
+# Register outermost so malformed headers are rejected before request parsing.
+app.add_middleware(RequestBodyLimit)

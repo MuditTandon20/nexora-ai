@@ -10,13 +10,16 @@ from test_learning import CONTENT
 
 
 def pack_payload():
-    return {'title':'Plants in the sunlight', 'summary':'Plants make food using energy captured from sunlight.',
+    return {'title':'Plants in the sunlight', 'summary':'Plants make their own food through photosynthesis.',
             'questions':[{'kind':'mcq','question':f'In practice example {i}, how do plants make food?',
                           'options':['Photosynthesis','Freezing','Melting','Digestion'], 'answer':'Photosynthesis',
                           'explanation':'Plants make their own food through photosynthesis.',
-                          'source_quote':'Plants make their own food through photosynthesis.', 'topic':'Photosynthesis'} for i in range(5)],
+                          'source_quote':'Plants make their own food through photosynthesis.', 'topic':'Photosynthesis'} for i in range(5)] + [
+                {'kind':'short_answer','question':'How do plants make their own food?', 'options':[],
+                 'answer':'Through photosynthesis.', 'explanation':'Plants make their own food through photosynthesis.',
+                 'source_quote':'Plants make their own food through photosynthesis.', 'topic':'Photosynthesis'}],
             'flashcards':[{'front':'How do plants make food?','back':'Through photosynthesis.'},
-                          {'front':'What captures sunlight?','back':'Chlorophyll.'}]}
+                          {'front':'What captures sunlight?','back':'Chlorophyll captures energy from sunlight.'}]}
 
 
 def test_output_contract_and_evidence():
@@ -78,7 +81,7 @@ def test_ai_provider_validation_publish_and_private_results(context, monkeypatch
     assert teacher.post(f'/api/quizzes/{qid}/publish').status_code == 200
     detail = student.get(f'/api/quizzes/{qid}').json()
     assert 'answer' not in detail['questions'][0]
-    answers = {q['id']:'Photosynthesis' for q in detail['questions']}
+    answers = {q['id']:'Photosynthesis' for q in detail['questions'] if q['kind']=='mcq'}
     attempt = student.post(f'/api/quizzes/{qid}/attempts',json={'mode':'class','answers':answers})
     assert attempt.status_code == 201, attempt.text
     assert attempt.json()['score'] == 5
@@ -89,7 +92,7 @@ def test_ai_provider_validation_publish_and_private_results(context, monkeypatch
     with factory() as db:
         event = db.scalar(select(AIEvent))
         assert event.status == 'success'
-        assert event.prompt_version == 'nexora-v1'
+        assert event.prompt_version == 'nexora-v2'
 
 
 def test_ai_malformed_response_logs_failure_and_missing_config(context, monkeypatch):

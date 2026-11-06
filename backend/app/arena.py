@@ -124,9 +124,16 @@ def publish_quiz(quiz_id: int, user: User = Depends(current_user), db: DB = Depe
     material = allowed_material(db, q.material_id, user)
     if not material.approved:
         raise HTTPException(422, 'Source material must be approved')
+    if q.published:
+        return {'ok': True}
     rows = list(db.scalars(select(QuizQuestion).where(QuizQuestion.quiz_id == q.id)))
-    if sum(r.kind == 'mcq' for r in rows) < 5:
-        raise HTTPException(422, 'A challenge needs at least five multiple-choice questions')
+    try:
+        pack = LearningPack.model_validate({'title': q.title, 'summary': q.summary,
+            'questions': [{key: getattr(r, key) for key in QuestionOut.model_fields} for r in rows],
+            'flashcards': [{'front': card.front, 'back': card.back} for card in db.scalars(select(Flashcard).where(Flashcard.quiz_id == q.id))]})
+        validate_grounding(pack, material.content)
+    except ValueError:
+        raise HTTPException(422, 'Review this draft: a complete, source-supported learning pack is required')
     if not q.published:
         q.published = True
         notify_class(db, user, q.class_id, 'A new learning challenge', q.title)

@@ -122,14 +122,18 @@ def submit(homework_id: int, data: SubmitIn, user: User = Depends(current_user),
     require(user, 'student')
     h = tenant_record(db, Homework, homework_id, user)
     classroom(db, h.class_id, user)
-    row = db.scalar(select(Submission).where(Submission.homework_id == h.id, Submission.student_id == user.id))
+    row = db.scalar(select(Submission).where(Submission.homework_id == h.id, Submission.student_id == user.id).with_for_update())
     if row and row.status == 'complete':
         raise HTTPException(409, 'Your teacher has already marked this complete')
+    if row and row.status == 'submitted' and row.answer == data.answer:
+        return {'ok': True}  # Exact retry: no timestamp or notification changes.
+    needs_notification = row is None or row.status == 'needs_revision'
     if not row:
         row = Submission(school_id=user.school_id, homework_id=h.id, student_id=user.id)
         db.add(row)
     row.answer, row.status, row.submitted_at = data.answer, 'submitted', now()
-    db.add(Notification(school_id=user.school_id, user_id=h.created_by, title='Homework submitted', body=f'A submission for {h.title} is ready to review.'))
+    if needs_notification:
+        db.add(Notification(school_id=user.school_id, user_id=h.created_by, title='Homework submitted', body=f'A submission for {h.title} is ready to review.'))
     db.commit()
     return {'ok': True}
 

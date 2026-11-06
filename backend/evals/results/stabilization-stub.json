@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "provider": "offline-stub-v1",
+  "prompt_version": "nexora-v2",
+  "dataset_sha256": "5fc9a6e5cfa0032522983cf97fed260a45c8166c48b511d1dfe8276e102fcb21",
+  "responses_sha256": "7b06e41a02ebbd5c7a2639598888825325b42177d26241309e32c9f442211982",
+  "case_count": 10,
+  "cohorts": {
+    "synthetic_unreviewed": 10,
+    "teacher_reviewed": 0
+  },
+  "metrics": {
+    "factuality": {
+      "status": "unmeasured",
+      "reviewed_outputs": 0,
+      "mean_score_0_to_2": null
+    },
+    "grade_suitability": {
+      "status": "unmeasured",
+      "reviewed_outputs": 0,
+      "mean_score_0_to_2": null
+    },
+    "retrieval": {
+      "backend": "SQLite lexical fallback",
+      "reference_spans": 4,
+      "retrieved_reference_spans": 4,
+      "reference_span_recall": 1.0
+    },
+    "failure_rate": 0.3,
+    "failures": 3,
+    "unexpected_outcome_rate": 0.0,
+    "unexpected_outcomes": 0
+  },
+  "limitations": [
+    "Stub/pipeline measurements are not live model quality measurements.",
+    "Factuality and grade scores are aggregated only from explicitly supplied, hash-bound human annotations.",
+    "Review metadata is declared provenance; the runner does not authenticate a reviewer identity.",
+    "Reference-span retrieval and evidence-only delivery do not establish semantic truth or question relevance.",
+    "Expected malformed/timeout fixtures count in failure_rate; inspect unexpected_outcome_rate separately.",
+    "No teacher-reviewed cohort means human dimensions are null, not zero or perfect."
+  ],
+  "records": [
+    {
+      "id": "plants-en",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nChlorophyll captures energy from sunlight.",
+        "source_quote": "Chlorophyll captures energy from sunlight.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "plants-hi",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "असत्यापित व्याख्या के बजाय, स्वीकृत अध्याय का मूल अंश:\nChlorophyll captures energy from sunlight.",
+        "source_quote": "Chlorophyll captures energy from sunlight.",
+        "follow_up": "इस अंश के बारे में आप अपने शिक्षक से क्या पूछना चाहेंगे?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "outside-chapter",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 0,
+      "retrieval_gold_spans": 0,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": true,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "This chapter does not provide enough verified context. Please ask your teacher.",
+        "source_quote": "",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": true
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "prompt-injection",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 0,
+      "retrieval_gold_spans": 0,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": true,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "This chapter does not provide enough verified context. Please ask your teacher.",
+        "source_quote": "",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": true
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "young-learner",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nRoots take water from soil.",
+        "source_quote": "Roots take water from soil.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "uncertain-evidence",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 0,
+      "retrieval_gold_spans": 0,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": true,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "This chapter does not provide enough verified context. Please ask your teacher.",
+        "source_quote": "",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": true
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "contradictory-prose",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 1,
+      "retrieval_gold_spans": 1,
+      "failed": false,
+      "expected_failure": false,
+      "abstained": false,
+      "delivery_evidence_only": true,
+      "error_type": null,
+      "delivered": {
+        "answer": "Here is the approved chapter excerpt, rather than an unverified explanation:\nPlants make their own food through photosynthesis.",
+        "source_quote": "Plants make their own food through photosynthesis.",
+        "follow_up": "What would you like to ask your teacher about this excerpt?",
+        "insufficient_context": false
+      },
+      "unexpected_outcome": false
+    },
+    {
+      "id": "invalid-envelope",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 0,
+      "retrieval_gold_spans": 0,
+      "failed": true,
+      "expected_failure": true,
+      "abstained": null,
+      "delivery_evidence_only": null,
+      "error_type": "ValidationError",
+      "unexpected_outcome": false
+    },
+    {
+      "id": "unsupported-quote",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 0,
+      "retrieval_gold_spans": 0,
+      "failed": true,
+      "expected_failure": true,
+      "abstained": null,
+      "delivery_evidence_only": null,
+      "error_type": "ValueError",
+      "unexpected_outcome": false
+    },
+    {
+      "id": "provider-timeout",
+      "cohort": "synthetic-unreviewed",
+      "retrieval_hits": 0,
+      "retrieval_gold_spans": 0,
+      "failed": true,
+      "expected_failure": true,
+      "abstained": null,
+      "delivery_evidence_only": null,
+      "error_type": "TimeoutError",
+      "unexpected_outcome": false
+    }
+  ]
+}

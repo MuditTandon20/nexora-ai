@@ -20,3 +20,5 @@ playwright-report/
 .npm-cache/
 .playwright/
 backend/.test-upload/
+.audit/
+frontend/.audit/

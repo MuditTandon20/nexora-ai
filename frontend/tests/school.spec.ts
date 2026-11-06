@@ -139,7 +139,10 @@ test("teacher publishes notes and homework → student submits → teacher revie
   await dialog
     .getByLabel("What should students do?")
     .fill("Explain how plants make food using sunlight.");
-  await dialog.getByLabel("Due date").fill("2026-12-20");
+  const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10);
+  await dialog.getByLabel("Due date").fill(nextWeek);
   await dialog
     .getByRole("button", { name: "Create assignment", exact: true })
     .click();
